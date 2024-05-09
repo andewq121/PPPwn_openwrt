@@ -1,3 +1,8 @@
+uci set network.lan.ipv6='off'
+uci set dhcp.lan.dhcpv6='disabled'
+uci delete network.globals.ula_prefix
+sysctl -w net.ipv6.conf.all.disable_ipv6=1
+echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
 opkg update && opkg install block-mount kmod-fs-ext4 kmod-usb-storage e2fsprogs kmod-usb-ohci kmod-usb-uhci fdisk
 DEVICE="$(awk -e '/\s\/overlay\s/{print $1}' /etc/mtab)"
 uci -q delete fstab.rwm
